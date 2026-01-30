@@ -5,21 +5,9 @@ from bpql import BPQLAgent
 from trainer import Trainer
 from utils import set_seed, make_delayed_env
 
-"""
-1) conservative-agent  
-    - set o_init = o_max
-    - use wrapper.py
-    
-2) Normal-agent  
-    - set o_init randomly (0 < o_init <= o_max)  
-    - specify behavior when there is no available states (default: 'no-ops').
-    - use wrapper2.py
-"""
-
 o_min  = 0     # min delay
 o_max  = 5     # max delay
 o_init = o_max # conservative-agent
-# o_init = random.randrange(o_min+1, o_max+1) # normal-agent
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
