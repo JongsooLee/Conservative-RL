@@ -7,11 +7,11 @@
 
 #### Test environments
 
-> python 3.8.0  
-> pytorch 2.0.0  
-> mujoco 2.2.0  
-> mujoco_py 2.1.2.14  
-> gym 0.26.2  
+    python == 3.8.0  
+    pytorch == 2.0.0  
+    mujoco == 2.2.0  
+    mujoco_py == 2.1.2.14  
+    gym == 0.26.2  
 
 ---
 
