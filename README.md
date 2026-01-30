@@ -1,11 +1,11 @@
 ## Reinforcement learning via conservative agent for environments with random delays (Neural Networks, 2026)
 
 > Pytorch implementation of Conservative reinforcement learning.  
-> See the paper here: [Conservative RL, Neural Networks 2026](https://www.sciencedirect.com/science/article/abs/pii/S0893608026001073)
+> Paper link: [Conservative RL, Neural Networks 2026](https://www.sciencedirect.com/science/article/abs/pii/S0893608026001073)
 
 ---
 
-#### Requirements
+#### Test environments
 
 > python 3.8.0  
 > pytorch 2.0.0  
@@ -31,5 +31,5 @@
 
 #### Acknowledgement
 
-> [Belief Projection-based Q-learning, NeurIPS 2023](https://openreview.net/pdf?id=sq0m11cUMV)
+> [Belief Projection-based Q-learning, NeurIPS 2023](https://github.com/jangwonkim-cocel/BPQL)
 
