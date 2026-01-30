@@ -59,8 +59,12 @@ class DelayedEnv(gym.Wrapper):
 
         self.local_time += 1
         self.state_idx += 1
-        # randomly sampled delay
+
+        # Uniform
         delay = random.randrange(self.min_obs_delayed_steps, self.max_obs_delayed_steps + 1)
+
+        # Possion
+        # delay = poisson_delay(min_delay=self.min_obs_delayed_steps, max_delay=self.max_obs_delayed_steps, lam=3)
 
         # meta obs: (a, b, c) -> a= obs, b=generated time, c= how delayed
         meta_obs    = [current_obs,    self.state_idx, delay]
@@ -102,3 +106,10 @@ class DelayedEnv(gym.Wrapper):
             del self.done_buffer[idx]
 
         return ret_meta_obs_list, ret_meta_reward_list, ret_meta_done_list, data_dict
+
+
+def poisson_delay(min_delay, max_delay, lam=3):
+    while True:
+        delay = np.random.poisson(lam)
+        if min_delay <= delay <= max_delay:
+            return delay
