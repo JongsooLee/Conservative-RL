@@ -1,9 +1,9 @@
 ## Reinforcement learning via conservative agent for environments with random delays (Neural Networks, 2026)
 
----
-
 > Pytorch implementation of Conservative reinforcement learning.  
 > See the paper here: https://www.sciencedirect.com/science/article/abs/pii/S0893608026001073
+
+---
 
 #### Requirements
 
@@ -12,6 +12,11 @@
 > mujoco 2.2.0  
 > mujoco_py 2.1.2.14  
 > gym 0.26.2  
+
+---
+
+#### Runs
+
 
 ---
 
