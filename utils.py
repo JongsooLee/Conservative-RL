@@ -3,7 +3,6 @@ import random
 import torch
 import torch.nn as nn
 from wrapper import DelayedEnv
-# from wrapper2 import DelayedEnv
 
 def weight_init(m):
     """Custom weight init for Conv2D and Linear layers.
