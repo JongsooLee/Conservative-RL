@@ -15,11 +15,6 @@
 
 ---
 
-#### Runs
-
-
----
-
 #### Citation
 
     @article{lee2026reinforcement,
