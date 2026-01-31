@@ -1,4 +1,4 @@
-## Reinforcement learning via conservative agent for environments with random delays (Neural Networks, 2026)
+## Reinforcement learning via conservative agent for environments with random delays
 
 > Pytorch implementation of Conservative reinforcement learning.  
 > Paper link: [Conservative RL, Neural Networks 2026](https://www.sciencedirect.com/science/article/abs/pii/S0893608026001073)
