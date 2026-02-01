@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import random
 import torch
@@ -55,24 +56,16 @@ def make_env(env_name, random_seed):
 
     return env, eval_env
 
-def make_delayed_env(args, random_seed, init_obs_delayed_steps, min_obs_delayed_steps, max_obs_delayed_steps):
+def make_delayed_env(args, random_seed):
     import gym
     # openai gym
     env_name = args.env_name
 
     env = gym.make(env_name)
-    delayed_env = DelayedEnv(env,
-                             seed = random_seed,
-                             init_obs_delayed_steps = init_obs_delayed_steps,
-                             min_obs_delayed_steps  = min_obs_delayed_steps,
-                             max_obs_delayed_steps  = max_obs_delayed_steps)
+    delayed_env = DelayedEnv(args, env, seed = random_seed)
 
     eval_env = gym.make(env_name)
-    eval_delayed_env = DelayedEnv(eval_env,
-                                  seed = random_seed,
-                                  init_obs_delayed_steps = init_obs_delayed_steps,
-                                  min_obs_delayed_steps  = min_obs_delayed_steps,
-                                  max_obs_delayed_steps  = max_obs_delayed_steps)
+    eval_delayed_env = DelayedEnv(args, eval_env, seed = random_seed)
 
     return delayed_env, eval_delayed_env
 
@@ -90,9 +83,23 @@ def do_sorting(list1, list2, list3):
     list3 = sort_list(list3)
     return list1, list2, list3
 
-def log_to_txt(env_name, random_seed, max_obs, total_step, result):
+def eliminate_head(list1, list2, list3):
+    del list1[0]
+    del list2[0]
+    del list3[0]
+    return list1, list2, list3
+
+def poisson_delay(min_delay, max_delay, mu=3):
+    while True:
+        delay = np.random.poisson(mu)
+        if min_delay <= delay <= max_delay:
+            return delay
+
+def log_to_txt(delay_type, env_name, random_seed, max_obs, total_step, result):
+    log_dir = './log/' + delay_type + '/'
+    os.makedirs(log_dir, exist_ok=True)
     seed = '(' + str(random_seed) + ')'
-    f = open('./log/' + env_name + '_max_obs_' + str(max_obs) + '_seed_' + seed + '.txt', 'a')
-    log = str(total_step) + ' ' + str(result) + '\n'
+    f = open(log_dir + env_name + '_max_obs_' + str(max_obs) +'_seed' + seed + '.txt', 'a')
+    log = 'Global steps: ' + str(total_step) + ' | ' + 'Average returns: ' + str(result) + '\n'
     f.write(log)
     f.close()
