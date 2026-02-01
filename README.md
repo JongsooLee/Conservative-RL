@@ -15,6 +15,15 @@
 
 ---
 
+#### Runs
+
+    python main.py --env-name HalfCheetah-v3 --min-obs-delayed-steps 0  --max-obs-delayed-steps 10 --init-obs-delayed-steps 10 --delay-type uniform --random-seed 2026 max-step 1000000
+
+
+Note that, for the conseravtive agent, max-obs-delay *must equal* init-obs-delay.
+
+---
+
 #### Citation
 
     @article{lee2026reinforcement,
