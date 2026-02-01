@@ -1,18 +1,13 @@
 import argparse
-import random
 import torch
 from bpql import BPQLAgent
 from trainer import Trainer
 from utils import set_seed, make_delayed_env
 
-o_min  = 0     # min delay
-o_max  = 5     # max delay
-o_init = o_max # conservative-agent
-
-if __name__ == '__main__':
+def get_parameters(o_min, o_max, o_init):
     parser = argparse.ArgumentParser()
-    parser.add_argument('--env-name', default='InvertedPendulum-v2', type=str)
-    parser.add_argument('--min-obs-delayed-steps', default = o_min, type=int)  # Assume o_min = 0
+    parser.add_argument('--env-name', default='HalfCheetah-v3', type=str)
+    parser.add_argument('--min-obs-delayed-steps', default = o_min, type=int)
     parser.add_argument('--max-obs-delayed-steps', default = o_max, type=int)  # Assume o_max > 0
     parser.add_argument('--init-obs-delayed-steps', default= o_init, type=int) # Assume o_init > 0
     parser.add_argument('--random-seed', default=-1, type=int)
@@ -29,13 +24,18 @@ if __name__ == '__main__':
     parser.add_argument('--buffer-size', default=1000000, type=int)
     parser.add_argument('--update-every', default=50, type=int)
     parser.add_argument('--log_std_bound', default=[-20, 2])
-    parser.add_argument('--gamma', default=0.99, type=float)
+    parser.add_argument('--gamma', default=0.99, type=float) # discount factor
     parser.add_argument('--actor-lr', default=3e-4, type=float)
     parser.add_argument('--critic-lr', default=3e-4, type=float)
     parser.add_argument('--temperature-lr', default=3e-4, type=float)
-    parser.add_argument('--xi', default=0.005, type=float)
+    parser.add_argument('--xi', default=0.005, type=float) # target smoothing factor
+    parser.add_argument('--delay-type', default='uniform', type=str)  # uniform | Poisson
+    parser.add_argument('--mu', default = o_max, type=int)  # Poisson parameter
     args = parser.parse_args()
 
+    return args
+
+def main(args):
     # Set Device
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -44,10 +44,7 @@ if __name__ == '__main__':
     random_seed = set_seed(trial_seed)
 
     # Create Delayed Environment
-    env, eval_env = make_delayed_env(args, random_seed,
-                                     init_obs_delayed_steps = args.init_obs_delayed_steps,
-                                     min_obs_delayed_steps  = args.min_obs_delayed_steps,
-                                     max_obs_delayed_steps  = args.max_obs_delayed_steps)
+    env, eval_env = make_delayed_env(args, random_seed)
 
     state_dim = env.observation_space.shape[0]
     action_dim = env.action_space.shape[0]
@@ -63,3 +60,11 @@ if __name__ == '__main__':
     # Create Trainer & Train
     trainer = Trainer(env, eval_env, agent, args)
     trainer.train()
+
+
+if __name__ == '__main__':
+    o_min  = 0       # min obs delay
+    o_max  = 5       # max obs delay
+    o_init = o_max   # for conservative agent
+    args = get_parameters(o_min, o_max, o_init)
+    main(args)
