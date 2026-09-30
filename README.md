@@ -9,7 +9,7 @@
 
 #### Overview
 
-Real-world reinforcement learning applications often involve delayed feedback, and random delays introduce additional challenges due to their variability and unpredictability. While existing delay-compensation methods primarily focus on constant delays, reinforcement learning under random delays remains relatively unexplored. We propose the Conservative Agent, a robust approach that reformulates a bounded random-delay environment as a constant-delay surrogate, enabling existing constant-delay methods to be directly applied without modifying their algorithmic structure. Experiments on MuJoCo continuous-control tasks demonstrate significant improvements over existing random-delay baselines in both asymptotic performance and sample efficiency.
+Real-world reinforcement learning applications often involve delayed feedback, and random delays introduce additional challenges due to their variability and unpredictability. While numerous delay-compensation methods have been proposed for environments with constant delays, those with random delays remain largely unexplored. We propose the Conservative Agent, a robust approach that reformulates a bounded random-delay environment as a constant-delay surrogate, enabling existing constant-delay methods to be directly applied without modifying their algorithmic structure. Experiments on MuJoCo continuous-control tasks demonstrate significant improvements over existing random-delay baselines in both asymptotic performance and sample efficiency.
 
 > Paper link: https://www.sciencedirect.com/science/article/abs/pii/S0893608026001073
 
