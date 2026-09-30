@@ -31,13 +31,14 @@
 
 #### Citation
 
-    @article{lee2026delayed,
-      title={Delayed homomorphic reinforcement learning for environments with delayed feedback},
-      author={Lee, Jongsoo and Kim, Jangwon and Han, Soohee},
-      journal={arXiv preprint arXiv:2604.03641},
-      year={2026}
+    @article{lee2026reinforcement,
+      title={Reinforcement Learning via Conservative Agent for Environments with Random Delays},
+      author={Lee, Jongsoo and Kim, Jangwon and Jeong, Jiseok and Han, Soohee},
+      journal={Neural Networks},
+      pages={108645},
+      year={2026},
+      publisher={Elsevier}
     }
-
 
 ---
 
